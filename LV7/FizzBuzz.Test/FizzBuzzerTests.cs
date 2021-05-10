@@ -8,9 +8,8 @@ namespace FizzBuzz.Test
     [TestFixture]
     class FizzBuzzerTests
     {
-        [TestCase(1)]
-        [TestCase(2)]
-        [TestCase(4)]
+        private static int[] IndivisibleInput = new int[] { 1, 2, 3, 4, 7, 8, 11, 13 };
+        [TestCaseSource(nameof(IndivisibleInput))]
         public void Convert_WhenInputIsIndivisible_ReturnsNumberAsString(int number) {
             // Arrange
             FizzBuzzer fizzBuzzer = new FizzBuzzer();
@@ -57,6 +56,12 @@ namespace FizzBuzz.Test
             string actual = fizzBuzzer.Convert(number);
 
             Assert.AreEqual(expected, actual);
+        }
+        public void Convert_WhenInputIsZeroOrNegative_ThrowsArgumentException()
+        {
+            FizzBuzzer FizzBuzzer = new FizzBuzzer();
+            int number = 0;
+            Assert.Throws<ArgumentException>(() => FizzBuzzer.Convert(number)) ;
         }
     }
 }
